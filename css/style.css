@@ -50,7 +50,7 @@ p {
 
 /* sections */
 section {
-  margin-bottom: 2.5rem;  /* clear gap between sections */
+  margin-bottom: 2.5rem;
 }
 
 /* skip to main, focus */
@@ -94,7 +94,7 @@ nav {
 }
 
 nav ul li a {
-    display: flex;
+    display: flex; /* Content modified by Copilot with the prompt, "How can I use flexbox to center the navigation link text horizontally and vertically?" */
     color: #ffffff;
     font-size: 1.125rem;
     text-decoration: none;
@@ -178,7 +178,7 @@ main ol {
 
 .options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));     /* Content modified by Copilot with the prompt, "How can .options-grid's columns scale with the width of the screen, staying at 1 column at phone breakpoints?" */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); /* Content modified by Copilot with the prompt, "How can .options-grid's columns scale with the width of the screen, staying at 1 column at phone breakpoints?" */
     gap: 1rem;
 }
 
