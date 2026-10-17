@@ -94,7 +94,7 @@ nav {
 }
 
 nav ul li a {
-    display: flex; /* Content modified by Copilot with the prompt, "How can I use flexbox to center the navigation link text horizontally and vertically?" */
+    display: flex; /* Content created with help by Copilot with the prompt, "What steps can I take with flexbox to center the navigation link text horizontally and vertically?" */
     color: #ffffff;
     font-size: 1.125rem;
     text-decoration: none;
@@ -144,12 +144,14 @@ img {
     display: block;
     max-width: 90%;
     height: auto;
+    aspect-ratio: 16 / 9;
     margin: 1rem auto;
     border-style: solid;
     border-width: 2px;
     border-color: #FFCB05;
     border-radius: 8px;
 }
+/* There are some aXe errors caused by the video on the homepage */
 
 /* lists */
 main ul {
@@ -178,7 +180,7 @@ main ol {
 
 .options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); /* Content modified by Copilot with the prompt, "How can .options-grid's columns scale with the width of the screen, staying at 1 column at phone breakpoints?" */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); /* Content created with help by Copilot with the prompt, "How can .options-grid's columns scale with the width of the screen, staying at 1 column at phone breakpoints?" */
     gap: 1rem;
 }
 
