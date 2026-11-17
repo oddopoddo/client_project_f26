@@ -2,11 +2,8 @@
 /* TO DO
 - add new breakpoint
 - add 404 page with javascript
-- 
 - complete writeup
-- maybe find something to style after in here: https://stylestage.dev/styles/
- */
-
+*/
 
 html, body{
   scroll-behavior: smooth;
@@ -286,8 +283,7 @@ footer address {
 }
 
 @media (min-width: 1024px) {
-    /* add better logo ribbon for desktop, not just umsi logo */
-    /* more compact, less white space */
+
     main {
         max-width: 70rem;
         margin: 0 auto;
@@ -321,10 +317,6 @@ footer address {
 
     .split-text p {
         max-width: none;
-    }
-
-    .split-section.reverse .split-img {
-        order: -1;
     }
 
     .split-section + ul {
