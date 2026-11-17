@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Merriweather:wght@700&display=swap');
 /* TO DO
-- add more grid (grid on at least 2 pages)
-- make sure everything works at 393px
+- add new breakpoint
+- add 404 page with javascript
+- 
 - complete writeup
 - maybe find something to style after in here: https://stylestage.dev/styles/
  */
@@ -29,6 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 2rem;
+    padding: 2rem;
     text-align: center;
     margin: auto;
 }
@@ -37,6 +39,7 @@ h2 {
   font-size: 1.5rem;
   line-height: 1.5;
   margin-bottom: 0.75rem;
+  padding: 0;
 }
 
 h3 {
@@ -56,7 +59,7 @@ section {
 /* skip to main, focus */
 nav a:hover,
 nav a:focus {
-     border: 2px dashed lightblue;
+     outline: 2px dashed lightblue;
 }
 
 .skip a {
@@ -138,6 +141,8 @@ img {
 
 .header-img {
     border: none;
+    max-width: 90%; 
+    border-radius: 0px;
 }
 
 .video {
@@ -185,6 +190,59 @@ main ol {
     gap: 1rem;
 }
 
+.options-grid > * {
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.options-grid > *:hover {
+    box-shadow: 0 4px 10px #00274C40;
+}
+
+/* text content cards */
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #d5dbe3;
+    border-top: 4px solid #FFCB05;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card h2, .card h3, .card h4 {
+    padding: 0;
+    margin-bottom: 0.75rem;
+}
+
+.card > *:last-child {
+    margin-bottom: 0;
+}
+
+/* buttons */
+
+.button {
+    display: inline-block;
+    background-color: #00274C;
+    color: #FFCB05;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid #00274C;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.button:hover, .button:focus-visible {
+    background-color: #FFCB05;
+    color: #00274C;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.button:focus-visible {
+    outline: 3px dashed #00274C;
+    outline-offset: 3px;
+    box-shadow: 0 4px 10px #00274C40;
+}
 
 /* footer */
 footer {
@@ -201,4 +259,95 @@ footer a {
 
 footer address {
     font-style: normal;
+}
+
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.social-media-icons img {
+    width: 2rem;
+    height: 2rem;
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.social-media-icons a:hover img{
+    transform: scale(1.2);
+}
+
+@media (min-width: 1024px) {
+    /* add better logo ribbon for desktop, not just umsi logo */
+    /* more compact, less white space */
+    main {
+        max-width: 70rem;
+        margin: 0 auto;
+    }
+
+    main p {
+        max-width: 40rem;
+    }
+
+    .video {
+        max-width: 50rem;
+    }
+
+    img {
+        max-width: 40rem;
+    }
+
+    .split-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        align-items: center;
+    }
+
+    .split-section img {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        object-fit: cover;
+    }
+
+    .split-text p {
+        max-width: none;
+    }
+
+    .split-section.reverse .split-img {
+        order: -1;
+    }
+
+    .split-section + ul {
+        margin-top: 1.5rem;
+    }
+
+    /* avoid hanging parts of options grid */
+
+    .options-grid {
+    grid-template-columns: repeat(6, 1fr);
+    }
+
+    .options-grid > * {
+        grid-column: span 2;
+    }
+
+    .options-grid > :nth-child(3n + 1):nth-last-child(2), .options-grid > :nth-child(3n + 2):nth-last-child(1) {
+        grid-column: span 3;
+        /* Content created with help by Copilot with the prompt, "What nth-child equations enable options-grid to stretch across when the number of grid items is not divisible by 3?" */
+    }
+
+    .options-grid > :nth-child(3n + 1):nth-last-child(1) {
+        grid-column: span 6;
+    }
+
 }

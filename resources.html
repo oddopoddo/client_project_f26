@@ -10,7 +10,7 @@
 <body>
   <div class="skip"><a href="#main">Skip to Main Content</a></div>
     <header>
-        <img class="header-img" src="images/UMSI_signature_vertical_informal_solidblue.jpg" alt="UMSI Logo">
+        <img class="header-img" src="images/umsi-logo-long.png" alt="UMSI Logo">
         <nav>
             <ul class="nav-grid">
                 <li><a href = "index.html">Home</a></li>
@@ -23,9 +23,14 @@
   </header>
 <main id="main">
 
-<section>
-  <h2>A Central Hub for Partnership Resources</h2>
-  <p>Engaged learning at UMSI connects students with organizations across sectors, scales, and missions. This page explains the kinds of partners students and faculty may work with, how partnerships are established, and where to find additional support from other units across the University of Michigan.</p>
+<section class="split-section">
+  <div class="split-text">
+    <h2>A Central Hub for Partnership Resources</h2>
+    <p>Engaged learning at UMSI connects students with organizations across sectors, scales, and missions. This page explains the kinds of partners students and faculty may work with, how partnerships are established, and where to find additional support from other units across the University of Michigan.</p>
+  </div>
+  <div class="split-img">
+    <img src="images/umsi_careerfair_1_26_2302.jpg" width="500" alt="UMSI students at the UMSI Career Fair.">
+  </div>
 </section>
 
 <section>
@@ -39,7 +44,6 @@
     <li><strong>Global partners:</strong> International organizations and collaborators, including human rights and advocacy groups, working across borders on shared information challenges.</li>
   </ul>
   <p>Every partnership is reciprocal. Your team contributes developing information expertise, while your partner contributes real-world context, lived experience, and organizational knowledge.</p>
-  <img src="images/umsi_careerfair_1_26_2302.jpg" width="500" alt="UMSI students at the UMSI Career Fair.">
 
 </section>
 
@@ -68,27 +72,33 @@
   <li><a href="https://www.si.umich.edu/host-student-project/library-archives-and-digital-curation/si-699-special-projects-librarianship">LAKES Mastery Course - SI 699</a></li>
   <li><a href="https://www.si.umich.edu/host-student-project/data-analysis/big-data-analytics-si-699">Big Data Analytics - SI 699</a></li>
 </ul>
-<img src="images/UMSI_StellantisAutoUX_091324_08.jpg" width="500" alt="UMSI students working on a project with Stellantis.">
+</section>
+
+<section class="split-section">
+  <div class="split-text">
+    <h2>Additional Campus Partner Resources</h2>
+    <p>Cross-disciplinary partner organizations across the University of Michigan offer specialized instructional support and workshop sessions that you can incorporate into your curriculum.</p>
+  </div>
+  <div class="split-img">
+   <img src="images/UMSI_StellantisAutoUX_091324_08.jpg" width="500" alt="UMSI students working on a project with Stellantis.">
+  </div>
 </section>
 
 <section>
-  <h2>Additional Campus Partner Resources</h2>
-  <p>Cross-disciplinary partner organizations across the University of Michigan offer specialized instructional support and workshop sessions that you can incorporate into your curriculum.</p>
-
-  <article>
+  <article class="card">
     <h3><a href="https://ginsberg.umich.edu/">Ginsberg Center for Community Engagement</a></h3>
     <p><strong>Focus:</strong> Prepares undergraduate and graduate students for respectful, reciprocal community-engaged learning in civic and non-profit settings.</p>
     <p><strong>Note:</strong> All first-year MSI and MHI students participate in a foundational Ginsberg workshop through SI 500.</p>
     <p><strong>Action:</strong> <a href="https://ginsberg.umich.edu/">Submit a Ginsberg Center Support Request</a> (please request at least one month in advance).</p>
   </article>
 
-  <article>
+  <article class="card">
     <h3><a href="https://csed.engin.umich.edu/">Center for Socially Engaged Engineering and Design (C-SEED)</a></h3>
     <p><strong>Focus:</strong> Educational sessions on socially engaged design, sociotechnical thinking, human-centered approaches, and community ethics in technical applications.</p>
     <p><strong>Action:</strong> <a href="https://www.google.com/search?q=https://cseed.engin.umich.edu">Explore C-SEED Educational Modules</a>.</p>
   </article>
 
-  <article>
+  <article class="card">
     <h3><a href="https://www.lib.umich.edu/research-and-scholarship/instruction-and-course-support/">University of Michigan Library Instructional Services</a></h3>
     <p><strong>Focus:</strong> Specialized instruction on source evaluation, special collections, literature search strategies, poster presentations, data visualization, and citation management tools.</p>
     <p><strong>Action:</strong> <a href="https://www.google.com/search?q=https://www.lib.umich.edu/services-and-spaces/instructors">Request U-M Library Instruction</a>.</p>
@@ -102,8 +112,23 @@
         <p>University of Michigan School of Information | <a href="https://www.si.umich.edu/programs/engaged-learning/about-engaged-learning-office">Engaged Learning Office </a></p>
       <address>
         <a href="mailto:umsi.engagement@umich.edu">umsi.engagement@umich.edu</a>
+        <span> | </span>
+        <a href="tel:7349368735">734-936-8735</a>
       </address>
-      <p>&copy; 2026 Regents of the University of Michigan</p>
+      <p>© Copyrights <span id="year"></span> by University of Michigan. All rights reserved.<br>2200 Hayward Street, Ann Arbor, MI 48109</p>
+
+       <script>
+      document.getElementById("year").innerHTML = new Date().getFullYear();
+      </script>
+
+      <ul class="social-media-icons">
+        <li><a href="https://www.instagram.com/umschoolofinformation/?hl=en"><img src="images/instagram-brands-solid-full.svg" alt="Instagram"></a></li>
+        <li><a href="https://www.threads.com/@umschoolofinformation"><img src="images/threads-brands-solid-full.svg" alt="Threads"></a></li>
+        <li><a href="https://www.linkedin.com/school/university-of-michigan---school-of-information/posts/"><img src="images/linkedin-brands-solid-full.svg" alt="LinkedIn"></a></li>
+        <li><a href="https://www.youtube.com/user/schoolofinformation"><img src="images/youtube-brands-solid-full.svg" alt="YouTube"></a></li>
+        <li><a href="https://www.facebook.com/uomsi/"><img src="images/facebook-brands-solid-full.svg" alt="Facebook"></a></li>
+        <li><a href="https://x.com/umsi"><img src="images/x-twitter-brands-solid-full.svg" alt="X"></a></li>
+      </ul>
     </footer>
 
 </body>

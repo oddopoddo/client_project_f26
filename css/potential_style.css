@@ -1,0 +1,406 @@
+/* ==========================================================================
+   style.css  |  UMSI Engaged Learning Office (ELO) site
+   Mobile-first: the base styles below ARE the phone layout (no min/max-width
+   media queries). Layouts grow on larger screens by themselves because the
+   Grids use auto-fit + minmax(), and sizes use rem, %, fr and clamp().
+   The only @media rule in this file is prefers-reduced-motion (accessibility).
+
+   Table of contents
+     1. Design tokens (colors, spacing)
+     2. Base / global rules
+     3. Skip to Main Content link
+     4. Header, logo, h1
+     5. Navigation (+ active page)
+     6. Main content: spacing, headings, text, lists, images, video
+     7. Grid card layout for <section> / <article>
+     8. Buttons / call-to-action links
+     9. Newsletter <aside>
+    10. Footer
+    11. Reduced motion (accessibility)
+
+   Colors: University of Michigan Maize (#FFCB05) and Blue (#00274C).
+   ========================================================================== */
+
+
+/* ---------- 1. DESIGN TOKENS ------------------------------------------------
+   Custom properties (variables) let us change a color or spacing value in
+   one place and have it update everywhere. */
+:root {
+  --um-blue: #00274C;        /* primary brand color: text, nav, footer */
+  --um-maize: #FFCB05;       /* accent color: highlights, active page, focus */
+  --blue-hover: #0b3a6b;     /* slightly lighter blue for hover states */
+  --text: #1a1a1a;           /* near-black body text (high contrast on white) */
+  --card-bg: #f2f2f2;        /* light gray behind cards */
+  --space: 1rem;             /* standard gap/padding (rem scales with user font size) */
+}
+
+
+/* ---------- 2. BASE / GLOBAL RULES ----------------------------------------- */
+
+/* border-box makes width include padding + border, so boxes never overflow
+   their container unexpectedly on small screens. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  /* Base font size is 1.125rem (18px at default settings): comfortably
+     readable on a phone, and rem units respect the user's browser settings. */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;                 /* generous line spacing for readability */
+  color: var(--text);
+  background: #fff;
+  max-width: 75rem;                 /* stops lines getting too wide on desktops */
+  margin-inline: auto;              /* centers the page when max-width is reached */
+}
+
+/* The reset stylesheet zeroes out margins and may remove bold/italics/list
+   bullets, so the rules below put back what we want. */
+strong { font-weight: 700; }
+address { font-style: normal; }     /* <address> is italic by default; turn off */
+
+/* Links: underlined so they are identifiable by more than color alone. */
+a {
+  color: var(--um-blue);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;          /* long URLs/titles wrap instead of causing sideways scroll */
+}
+a:hover {
+  background: var(--um-maize);      /* maize highlight on hover */
+  text-decoration-thickness: 0.15em;
+}
+
+/* Keyboard focus ring. It is two rings (blue inside, maize outside) so it
+   stays visible on BOTH light and dark backgrounds. :focus-visible only shows
+   for keyboard users, not on mouse clicks. */
+:focus-visible {
+  outline: 3px solid var(--um-maize);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--um-blue);
+}
+
+
+/* ---------- 3. SKIP TO MAIN CONTENT LINK -------------------------------------
+   Works for the markup on every page (index.html has it in <div class="skip">,
+   the other pages put it directly in <header>) because it targets the
+   href="#main" itself rather than a class.
+   Hidden on load by moving it above the viewport (NOT display:none, which
+   would also remove it from the tab order). On :focus it slides into view. */
+a[href="#main"] {
+  position: absolute;
+  top: 0;
+  left: 0.5rem;
+  transform: translateY(-150%);     /* parked off-screen above the page */
+  z-index: 100;                     /* sits on top of everything when visible */
+  padding: 0.75rem 1rem;
+  background: var(--um-maize);
+  color: var(--um-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+a[href="#main"]:focus {
+  transform: translateY(0.5rem);    /* visible while it has keyboard focus */
+}
+
+
+/* ---------- 4. HEADER, LOGO, H1 ---------------------------------------------- */
+header {
+  padding: var(--space) var(--space) 0;
+}
+
+header img {
+  /* Fluid logo: 55% of the header width, but never larger than 11rem. */
+  width: min(55%, 11rem);
+  height: auto;
+  display: block;
+  margin-bottom: var(--space);
+}
+
+h1 {
+  /* clamp(min, preferred, max): fluid heading size without a media query. */
+  font-size: clamp(1.6rem, 6vw, 2.75rem);
+  line-height: 1.2;
+  background: var(--um-blue);
+  color: #fff;
+  /* Negative margins let the blue band stretch edge-to-edge of the page,
+     cancelling the header's side padding. */
+  margin: var(--space) calc(var(--space) * -1) 0;
+  padding: 1.5rem var(--space);
+  border-bottom: 0.4rem solid var(--um-maize);   /* maize accent stripe */
+}
+
+
+/* ---------- 5. NAVIGATION ----------------------------------------------------
+   The <ul> is a CSS Grid. repeat(auto-fit, minmax(...)) means: "fit as many
+   columns as possible, each at least 9.5rem wide." On a phone that gives
+   2 columns (2x2 tiles); on a wide screen all 4 links sit in one row.
+   min(100%, 9.5rem) prevents overflow on very narrow screens. */
+nav ul {
+  list-style: none;                 /* removes bullets */
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+}
+
+nav a {
+  display: flex;                    /* flex centers the text inside the tile */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 3.5rem;               /* 56px tall: easy to tap with a thumb */
+  padding: 0.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;            /* tile shape makes these obviously clickable */
+  color: var(--um-blue);
+  background: #fff;
+  border: 2px solid var(--um-blue);
+  border-bottom-width: 0.4rem;      /* thick "base" on every tile */
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+nav a:hover {
+  background: var(--um-maize);
+  color: var(--um-blue);
+}
+
+/* ACTIVE PAGE. Uses several cues, not just text color (accessibility):
+   1) filled blue background  2) white bold text  3) maize bar along the bottom.
+   `a[aria-current="page"]` is included so this also works if you add that
+   attribute in the HTML (recommended: it tells screen readers the current page). */
+nav .active a,
+nav a[aria-current="page"] {
+  background: var(--um-blue);
+  color: #fff;
+  font-weight: 800;
+  border-bottom-color: var(--um-maize);
+}
+
+
+/* ---------- 6. MAIN CONTENT --------------------------------------------------- */
+main {
+  padding: 1.5rem var(--space);
+}
+
+/* "Owl" spacing: every direct child of <main> that follows another one gets
+   top margin, so sections are evenly separated without extra wrapper divs. */
+main > * + * {
+  margin-top: 2.5rem;
+}
+
+/* Headings. Browsers/reset strip default heading styles, so set them here. */
+h2 {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  line-height: 1.25;
+  color: var(--um-blue);
+  padding-bottom: 0.4rem;
+  border-bottom: 0.25rem solid var(--um-maize);
+}
+h3 {
+  font-size: clamp(1.2rem, 4.5vw, 1.5rem);
+  line-height: 1.3;
+  color: var(--um-blue);
+}
+h4 {
+  font-size: 1.125rem;
+  color: var(--um-blue);
+}
+
+/* Paragraph spacing (reset removes default margins). */
+p + p {
+  margin-top: 1rem;
+}
+
+/* Lists: restored bullets/numbers in case html5reset removed them.
+   Only applies inside <main>, so the nav list stays bullet-free. */
+main ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+main ol {
+  list-style: decimal;
+  padding-left: 1.75rem;
+}
+main li + li {
+  margin-top: 0.75rem;              /* space between list items = bigger, safer tap spacing */
+}
+main li a {
+  display: inline-block;
+  padding-block: 0.25rem;           /* makes list links taller to tap */
+}
+
+/* Images: never wider than their container, keep proportions. This overrides
+   the fixed width="500" attributes in the HTML on small screens. */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+/* YouTube embed: fills the width and keeps a 16:9 shape at any screen size. */
+iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;                        /* replaces the obsolete frameborder="0" attribute */
+}
+
+
+/* ---------- 7. GRID CARD LAYOUT FOR SECTIONS / ARTICLES ---------------------
+   Used on all four pages. Each <section> becomes a grid:
+   - repeat(auto-fit, minmax(...)) = as many columns as fit.
+   - The minimum column width is max(17rem, 30%): the 30% part caps the grid at
+     3 columns on big screens, so cards don't become tiny.
+   - min(100%, ...) keeps a single card from overflowing a very small phone.
+   Result: 1 column on a phone, 2 on a tablet, 3 on a desktop, no media query. */
+section {
+  display: grid;
+  gap: var(--space);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(17rem, 30%)), 1fr));
+}
+
+/* Everything in a section that is NOT a card (the h2, intro paragraphs,
+   images, lists, the video) spans the full row; only <article> cards sit
+   side by side. `1 / -1` = from the first grid line to the last. */
+section > :not(article) {
+  grid-column: 1 / -1;
+}
+
+/* Card styling for each <article>. */
+article {
+  background: var(--card-bg);
+  padding: var(--space);
+  border-left: 0.4rem solid var(--um-maize);
+  border-radius: 0.5rem;
+}
+article > * + * {
+  margin-top: 0.75rem;              /* even spacing inside a card */
+}
+article article {
+  background: #fff;                 /* nested card (starting.html) gets a white background so it stands out */
+}
+
+/* Course list on resources.html (an <ul> right after an <h3> in a section).
+   It is its own Grid of "link tiles": 1 column on phones, more when wide. */
+section > h3 + ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+section > h3 + ul li + li {
+  margin-top: 0;                    /* the grid gap handles spacing here */
+}
+section > h3 + ul a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: 3.5rem;               /* big tap target */
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--um-blue);
+  border-radius: 0.5rem;
+}
+
+
+/* ---------- 8. BUTTON-STYLE LINKS --------------------------------------------
+   The call-to-action links that sit directly inside a card on index.html
+   (e.g. "Prepare for your experience"). Big, filled, easy to tap. */
+article > a {
+  display: inline-block;
+  min-height: 3rem;                 /* 48px minimum touch target */
+  padding: 0.75rem 1.25rem;
+  background: var(--um-blue);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0.5rem;
+}
+article > a:hover {
+  background: var(--um-maize);
+  color: var(--um-blue);
+}
+
+
+/* ---------- 9. NEWSLETTER <aside> --------------------------------------------- */
+aside {
+  background: var(--um-blue);
+  color: #fff;
+  padding: 1.5rem var(--space);
+  border-radius: 0.5rem;
+}
+aside > * + * {
+  margin-top: 1rem;
+}
+aside h2 {
+  color: #fff;                      /* heading is white on the blue box */
+}
+aside a {
+  color: var(--um-maize);           /* maize links on blue: strong contrast */
+}
+aside a:hover {
+  color: var(--um-blue);
+}
+/* The sign-up link inside the <div> becomes a maize button. */
+aside div a {
+  display: inline-block;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--um-maize);
+  color: var(--um-blue);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0.5rem;
+}
+aside div a:hover {
+  background: #fff;
+}
+
+
+/* ---------- 10. FOOTER ---------------------------------------------------------
+   Same footer on every page. A Grid again: the three pieces (org name/link,
+   email, copyright) stack on a phone and sit side by side when there's room. */
+footer {
+  margin-top: 2.5rem;
+  padding: 1.5rem var(--space);
+  background: var(--um-blue);
+  color: #fff;
+  text-align: center;
+  display: grid;
+  gap: var(--space);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  align-items: center;
+  border-top: 0.4rem solid var(--um-maize);
+}
+footer a {
+  display: inline-block;
+  padding: 0.5rem;                  /* bigger tap area for footer links */
+  color: var(--um-maize);
+}
+footer a:hover {
+  color: var(--um-blue);
+}
+
+
+/* ---------- 11. REDUCED MOTION (accessibility) --------------------------------
+   Allowed media query: respects the visitor's OS "reduce motion" setting by
+   switching off transitions and animations (and any smooth scrolling). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
